@@ -1,4 +1,4 @@
-﻿using designPattern.Singleton;
+﻿using designPattern.FactoryPattern;
 using System;
 
 namespace designPattern
@@ -7,17 +7,17 @@ namespace designPattern
     {
         static void Main(string[] args)
         {
-            var log = Singleton.Log.Instance;
+            //creo un objeto del hijo de la clase abstracta SalesFactory
+            SalesFactory storeSaleFactory = new StoreSaleFactory(10);
+            SalesFactory internetSaleFactory = new InternetSalesFactory(2);
 
-            log.Save("a");
-            log.Save("b");
+            ISale sale1 = storeSaleFactory.GetSale();
+            sale1.Sell(15);
 
 
-            var a = Singleton.Singleton.Instance;
-            var b = Singleton.Singleton.Instance;
+            ISale sale2 = internetSaleFactory.GetSale();
+            sale2.Sell(15);
 
-            Console.WriteLine(a == b);
-            Console.ReadKey();
         }
     }
 }
